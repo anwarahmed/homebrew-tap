@@ -1,0 +1,57 @@
+name: Update formula
+
+# Regenerates the typeshelf formula from its latest release, then installs it with
+# Homebrew on macOS and Linux to prove it works.
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [scripts/**, .github/workflows/**]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      has_formula: ${{ steps.render.outputs.has_formula }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: render
+        run: |
+          result=$(scripts/render.sh)
+          echo "render: $result" | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ -f Formula/typeshelf.rb ]; then echo "has_formula=true" >> "$GITHUB_OUTPUT"; fi
+          if [ -n "$(git status --porcelain Formula)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add Formula
+            git commit -m "typeshelf $result"
+            git push
+          fi
+
+  test:
+    needs: update
+    if: needs.update.outputs.has_formula == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Put Homebrew on PATH (Linux)
+        if: runner.os == 'Linux'
+        run: echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
+      - run: brew install anwarahmed/tap/typeshelf
+      - run: brew test anwarahmed/tap/typeshelf
+      - run: typeshelf --version
