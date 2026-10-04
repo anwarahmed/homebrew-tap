@@ -3,28 +3,28 @@
 class Typeshelf < Formula
   desc "Practice typing in the terminal by retyping classic books"
   homepage "https://github.com/anwarahmed/typeshelf"
-  version "0.2.3"
+  version "0.2.4"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/anwarahmed/typeshelf/releases/download/v0.2.3/typeshelf-aarch64-apple-darwin"
-      sha256 "99232aecf805b95accf54d8905246cd1ca9af2576e55afde97f80ad4f83106ac"
+      url "https://github.com/anwarahmed/typeshelf/releases/download/v0.2.4/typeshelf-aarch64-apple-darwin"
+      sha256 "8069485cdcfb7d1735af7ae5846d462451b1283f20df6a696304b5616ef06058"
     end
     on_intel do
-      url "https://github.com/anwarahmed/typeshelf/releases/download/v0.2.3/typeshelf-x86_64-apple-darwin"
-      sha256 "447bf6e47a5a00939d0ef5062c5189ee1b9bf79d1c04cd99596968b1708c01f9"
+      url "https://github.com/anwarahmed/typeshelf/releases/download/v0.2.4/typeshelf-x86_64-apple-darwin"
+      sha256 "3aa9a58dbc3f6567c55c832896ec9040e8ed8197a4548582c77572af314b2950"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/anwarahmed/typeshelf/releases/download/v0.2.3/typeshelf-aarch64-unknown-linux-musl"
-      sha256 "eb099cd16e4dfd4227c9155ff4b5d1348cc899c96d8a06390526119ffe9f9245"
+      url "https://github.com/anwarahmed/typeshelf/releases/download/v0.2.4/typeshelf-aarch64-unknown-linux-musl"
+      sha256 "dd16f1f37ab327b813997c889fa1fcc84a9a5110edec26b415c32ed46cedb3f9"
     end
     on_intel do
-      url "https://github.com/anwarahmed/typeshelf/releases/download/v0.2.3/typeshelf-x86_64-unknown-linux-musl"
-      sha256 "198d840b97c973378e422921dca5894c799a4475e8e56d1fae384c7338cf7a29"
+      url "https://github.com/anwarahmed/typeshelf/releases/download/v0.2.4/typeshelf-x86_64-unknown-linux-musl"
+      sha256 "239a0d1db00c8d3f64d3e08eb6e949ef349f6dd6dd01ad4dc346a92c430312d8"
     end
   end
 
