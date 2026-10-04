@@ -97,8 +97,9 @@ What to know when it happens:
   before `brew upgrade`, it updates itself and breaks the link again. Upgrade first.
 - The check that the fix holds: on a Homebrew install, `typeshelf update` must print
   "this copy can't update itself: installed with Homebrew; use brew upgrade typeshelf".
-- It cannot be reproduced on Linux, and the workflow's `brew test` does not catch it:
-  that runs the binary by its Cellar path, not through the link.
+- It cannot be reproduced on Linux, and `brew test` does not catch it: that runs the
+  binary by its Cellar path, not through the link. The workflow's last step does: it
+  runs `typeshelf update` by its linked name on both runners and fails unless it refuses.
 
 The general rule: a program installed by a package manager must not rewrite its own
 files, and must resolve symlinks before deciding how it was installed.
@@ -133,8 +134,5 @@ Re-enable the workflow under Actions if the schedule stops.
 
 ## Not done
 
-- No check that a Homebrew-installed typeshelf refuses to update itself. A step in the
-  `test` job running `typeshelf update` (through the linked path, on the macOS runner)
-  and expecting the refusal would have caught the symlink bug before users did.
 - The token path (`TAP_TOKEN`, and the ten-minute wait in typeshelf's release run) has
   never run for real.
