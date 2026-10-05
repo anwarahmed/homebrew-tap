@@ -67,21 +67,13 @@ jobs:
           out=$(typeshelf update 2>&1) && status=0 || status=$?
           echo "$out"
           [ "$status" -ne 0 ] && echo "$out" | grep -q "installed with Homebrew"
-      - name: wordl must run from another directory, with Homebrew's bash
-        # The script finds its word lists beside itself, through the link in bin, and the
-        # formula points its first line at Homebrew's bash (macOS ships 3.2).
+      - name: A Homebrew copy of wordl must refuse to update itself
+        # Run by its linked name, as a user would, from another directory. The formula
+        # installs a marker (share/wordl/managed-by) that says Homebrew owns the copy;
+        # wordl then leaves updating to brew upgrade.
         if: matrix.formula == 'wordl'
         run: |
           cd /
-          head -n 1 "$(brew --prefix wordl)/libexec/wordl" | grep -q "$(brew --prefix bash)/bin/bash"
-          test -r "$(brew --prefix wordl)/libexec/words/answers.txt"
-          wordl --version
-      - name: A Homebrew copy of wordl must refuse to update itself
-        # Run by its linked name, as a user would. The formula marks the copy as
-        # Homebrew's (MANAGED_BY); wordl then leaves updating to brew upgrade.
-        if: matrix.formula == 'wordl'
-        run: |
-          grep -q '^MANAGED_BY="Homebrew' "$(brew --prefix wordl)/libexec/wordl"
           out=$(wordl update 2>&1) && status=0 || status=$?
           echo "$out"
           [ "$status" -ne 0 ] && echo "$out" | grep -q "installed with Homebrew"

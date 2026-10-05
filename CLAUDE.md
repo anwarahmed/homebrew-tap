@@ -30,9 +30,11 @@ real on 2026-10-04, during the releases of typeshelf 0.2.1 to 0.2.3.
 
 ## Adding a formula
 
-1. Write `scripts/formulae/<name>.sh` (copy the nearer of the two: `typeshelf.sh` for
-   one bare executable per platform, `wordl.sh` for one archive that is the same
-   everywhere). The file name is the formula name.
+1. Write `scripts/formulae/<name>.sh`; the file name is the formula name. Both existing
+   ones are for one bare executable per platform; copy `wordl.sh` if the program
+   updates itself. For a single archive that is the same on every platform, see
+   `wordl.sh` as it was before 0.2.0 (`git log -- scripts/formulae/wordl.sh`): one
+   `url`, no `version` line, files installed into `libexec`.
 2. Add checks that only make sense for that formula as a step in the `test` job with
    `if: matrix.formula == '<name>'`. Nothing else in the workflow names formulae.
 3. Add the project to `README.md` and to "What the tap depends on" below.
@@ -65,26 +67,24 @@ In typeshelf:
   `test` block checks it).
 - **typeshelf must never update a Homebrew copy itself.** See the first incident below.
 
-In wordl:
+In wordl (a Rust program since 0.2.0; 0.1.x was a bash script shipped as one archive):
 
-- Each release has one archive, `wordl-<version>.tar.gz`, listed in `SHA256SUMS`. It
-  unpacks to `wordl-<version>/` holding the `wordl` script and a `words/` directory.
-  The formula has no `version` line; Homebrew reads the version from the archive's name.
-- The script's first line is exactly `#!/usr/bin/env bash`. The formula rewrites it to
-  Homebrew's bash, because wordl needs bash 4.4 and macOS ships 3.2; if the line
-  changes, `inreplace` fails the install.
-- The script finds `words/` beside itself after resolving symlinks, which is what lets
-  it run through the link in Homebrew's `bin`.
-- Tags are `v<version>` and `wordl --version` prints that version.
-- **wordl must never update a Homebrew copy itself.** Since 0.1.1 wordl updates itself
-  on start. The script has a line that is exactly `MANAGED_BY=""`; the formula rewrites
-  it to `MANAGED_BY="Homebrew; use brew upgrade wordl"`, and wordl then refuses
-  (`wordl update` prints "installed with Homebrew; use brew upgrade wordl"). If the
-  line changes, `inreplace` fails the install rather than shipping a copy that would
-  update itself. wordl also checks its real path for `Cellar` as a fallback. The
-  workflow's last wordl step proves the refusal on both platforms after every render.
-  Any new formula for a program that updates itself needs the same two things: the
-  switch set at install time, and a test through the linked name.
+- Release assets are bare executables named `wordl-<rust target>`, for the same four
+  targets as typeshelf. `scripts/formulae/wordl.sh` fails if a checksum for one is
+  missing. A release with no binaries at all (0.1.x) leaves the formula untouched.
+- Each release has a `SHA256SUMS` file in `sha256sum` format.
+- Tags are `v<version>`, and `wordl --version` prints that version.
+- **wordl must never update a Homebrew copy itself.** wordl updates itself on start
+  unless a package owns the copy. It looks for a marker file at
+  `../share/wordl/managed-by` from the real directory of its binary; the formula writes
+  it (`share/"wordl/managed-by"`, one line: `Homebrew; use brew upgrade wordl`), and
+  `wordl update` then prints "installed with Homebrew; use brew upgrade wordl". If
+  wordl moves or renames what it looks for, the formula must follow. wordl also checks
+  its real path for `Cellar` as a fallback. The workflow's last wordl step proves the
+  refusal on both platforms after every render.
+
+Any new formula for a program that updates itself needs the same two things: the switch
+set at install time, and a test through the linked name.
 
 ## Commands
 
@@ -94,7 +94,7 @@ gh workflow run update.yml --repo anwarahmed/homebrew-tap
 
 # Which version a formula is at
 gh api repos/anwarahmed/homebrew-tap/contents/Formula/typeshelf.rb -q .content | base64 -d | grep version
-gh api repos/anwarahmed/homebrew-tap/contents/Formula/wordl.rb -q .content | base64 -d | grep url
+gh api repos/anwarahmed/homebrew-tap/contents/Formula/wordl.rb -q .content | base64 -d | grep version
 
 # Recent runs, and what started each one
 gh run list --repo anwarahmed/homebrew-tap --workflow update.yml --limit 10 --json event,conclusion,createdAt
