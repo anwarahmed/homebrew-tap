@@ -3,8 +3,8 @@
 class Wordl < Formula
   desc "Wordle-style word game for the terminal"
   homepage "https://github.com/anwarahmed/wordl"
-  url "https://github.com/anwarahmed/wordl/releases/download/v0.1.0/wordl-0.1.0.tar.gz"
-  sha256 "5006f4a90031ff34f1e96fdd8f2bd296e9cd33cd13519e96f4f11098491f8d04"
+  url "https://github.com/anwarahmed/wordl/releases/download/v0.1.1/wordl-0.1.1.tar.gz"
+  sha256 "c190f393f61b1dd1c30b9fd4efa04e71fbcc7c7869b945bda294758e44a93059"
   license "MIT"
 
   # macOS ships bash 3.2 and wordl needs 4.4 or newer.
