@@ -3,24 +3,39 @@
 class Wordl < Formula
   desc "Wordle-style word game for the terminal"
   homepage "https://github.com/anwarahmed/wordl"
-  url "https://github.com/anwarahmed/wordl/releases/download/v0.1.2/wordl-0.1.2.tar.gz"
-  sha256 "7fe303476cf96fb59e6086d945c466ac66e5cfd7a226865beb01cd53a897c6f8"
+  version "0.2.0"
   license "MIT"
 
-  # macOS ships bash 3.2 and wordl needs 4.4 or newer.
-  depends_on "bash"
+  on_macos do
+    on_arm do
+      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.0/wordl-aarch64-apple-darwin"
+      sha256 "02b30d6c86f7c7034e655e4e863db09cd0d4db5ec110e8646dc0f8aeeaa95924"
+    end
+    on_intel do
+      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.0/wordl-x86_64-apple-darwin"
+      sha256 "e645382ddb57b2598ae3aa58e660c6fd97726ca808ffc5a448aa9381b73abc0b"
+    end
+  end
+
+  on_linux do
+    on_arm do
+      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.0/wordl-aarch64-unknown-linux-musl"
+      sha256 "95b0268ddbcb43a807b6dc899f4414b00275b0650b23adeefd3e613a3fa118e8"
+    end
+    on_intel do
+      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.0/wordl-x86_64-unknown-linux-musl"
+      sha256 "3a8e9c11e74ca6b0374c72550dcb16376866691495d30a7fadd8c23403d1c93b"
+    end
+  end
 
   def install
-    # The script looks for its word lists in words/ beside itself, after resolving
-    # the link Homebrew puts in bin.
-    libexec.install "wordl", "words"
-    inreplace libexec/"wordl" do |s|
-      s.gsub! "#!/usr/bin/env bash", "#!#{Formula["bash"].opt_bin}/bash"
-      # wordl updates itself unless a package owns the copy. This marks it as ours;
-      # replacing a file Homebrew installed would break the next brew upgrade.
-      s.gsub! 'MANAGED_BY=""', 'MANAGED_BY="Homebrew; use brew upgrade wordl"'
-    end
-    bin.install_symlink libexec/"wordl"
+    # Each release asset is the bare executable, named for its platform.
+    bin.install Dir["wordl-*"].first => "wordl"
+    # wordl updates itself unless a package owns the copy. It looks for this marker at
+    # ../share/wordl/managed-by from its binary; replacing a file Homebrew installed
+    # would break the next brew upgrade.
+    (share/"wordl").mkpath
+    (share/"wordl/managed-by").write "Homebrew; use brew upgrade wordl\n"
   end
 
   test do
