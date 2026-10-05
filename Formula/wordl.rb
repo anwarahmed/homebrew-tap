@@ -14,7 +14,12 @@ class Wordl < Formula
     # The script looks for its word lists in words/ beside itself, after resolving
     # the link Homebrew puts in bin.
     libexec.install "wordl", "words"
-    inreplace libexec/"wordl", "#!/usr/bin/env bash", "#!#{Formula["bash"].opt_bin}/bash"
+    inreplace libexec/"wordl" do |s|
+      s.gsub! "#!/usr/bin/env bash", "#!#{Formula["bash"].opt_bin}/bash"
+      # wordl updates itself unless a package owns the copy. This marks it as ours;
+      # replacing a file Homebrew installed would break the next brew upgrade.
+      s.gsub! 'MANAGED_BY=""', 'MANAGED_BY="Homebrew; use brew upgrade wordl"'
+    end
     bin.install_symlink libexec/"wordl"
   end
 

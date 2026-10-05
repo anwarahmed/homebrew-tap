@@ -76,6 +76,15 @@ In wordl:
 - The script finds `words/` beside itself after resolving symlinks, which is what lets
   it run through the link in Homebrew's `bin`.
 - Tags are `v<version>` and `wordl --version` prints that version.
+- **wordl must never update a Homebrew copy itself.** Since 0.1.1 wordl updates itself
+  on start. The script has a line that is exactly `MANAGED_BY=""`; the formula rewrites
+  it to `MANAGED_BY="Homebrew; use brew upgrade wordl"`, and wordl then refuses
+  (`wordl update` prints "installed with Homebrew; use brew upgrade wordl"). If the
+  line changes, `inreplace` fails the install rather than shipping a copy that would
+  update itself. wordl also checks its real path for `Cellar` as a fallback. The
+  workflow's last wordl step proves the refusal on both platforms after every render.
+  Any new formula for a program that updates itself needs the same two things: the
+  switch set at install time, and a test through the linked name.
 
 ## Commands
 
