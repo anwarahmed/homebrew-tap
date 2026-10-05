@@ -1,7 +1,7 @@
 name: Update formula
 
-# Regenerates the typeshelf formula from its latest release, then installs it with
-# Homebrew on macOS and Linux to prove it works.
+# Regenerates each formula from its project's latest release, then installs every
+# formula with Homebrew on macOS and Linux to prove it works.
 
 on:
   schedule:
@@ -24,41 +24,55 @@ jobs:
     permissions:
       contents: write
     outputs:
-      has_formula: ${{ steps.render.outputs.has_formula }}
+      formulae: ${{ steps.render.outputs.formulae }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - id: render
         run: |
           result=$(scripts/render.sh)
-          echo "render: $result" | tee -a "$GITHUB_STEP_SUMMARY"
-          if [ -f Formula/typeshelf.rb ]; then echo "has_formula=true" >> "$GITHUB_OUTPUT"; fi
+          printf '%s\n' "$result" | sed 's/^/render: /' | tee -a "$GITHUB_STEP_SUMMARY"
           if [ -n "$(git status --porcelain Formula)" ]; then
+            # Rewritten formulae are the lines that end in a version: "typeshelf 0.2.4".
+            message=$(printf '%s\n' "$result" | grep -v -e ' unchanged$' -e ' no release$' | paste -sd, - | sed 's/,/, /g')
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add Formula
-            git commit -m "typeshelf $result"
+            git commit -m "$message"
             git push
           fi
+          # Every formula in the repository is tested, changed or not.
+          echo "formulae=$(ls Formula | sed -n 's/\.rb$//p' | jq -R . | jq -sc .)" >> "$GITHUB_OUTPUT"
 
   test:
     needs: update
-    if: needs.update.outputs.has_formula == 'true'
+    if: needs.update.outputs.formulae != '[]'
     strategy:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest]
+        formula: ${{ fromJSON(needs.update.outputs.formulae) }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Put Homebrew on PATH (Linux)
         if: runner.os == 'Linux'
         run: echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
-      - run: brew install anwarahmed/tap/typeshelf
-      - run: brew test anwarahmed/tap/typeshelf
-      - run: typeshelf --version
-      - name: A Homebrew copy must refuse to update itself
+      - run: brew install anwarahmed/tap/${{ matrix.formula }}
+      - run: brew test anwarahmed/tap/${{ matrix.formula }}
+      - run: ${{ matrix.formula }} --version
+      - name: A Homebrew copy of typeshelf must refuse to update itself
         # Run by its linked name, as a user would. Up to 0.2.2 the self-updater did not see
         # through Homebrew's symlink on macOS, replaced it, and broke the next `brew upgrade`.
+        if: matrix.formula == 'typeshelf'
         run: |
           out=$(typeshelf update 2>&1) && status=0 || status=$?
           echo "$out"
           [ "$status" -ne 0 ] && echo "$out" | grep -q "installed with Homebrew"
+      - name: wordl must run from another directory, with Homebrew's bash
+        # The script finds its word lists beside itself, through the link in bin, and the
+        # formula points its first line at Homebrew's bash (macOS ships 3.2).
+        if: matrix.formula == 'wordl'
+        run: |
+          cd /
+          head -n 1 "$(brew --prefix wordl)/libexec/wordl" | grep -q "$(brew --prefix bash)/bin/bash"
+          test -r "$(brew --prefix wordl)/libexec/words/answers.txt"
+          wordl --version

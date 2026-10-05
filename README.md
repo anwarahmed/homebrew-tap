@@ -13,12 +13,23 @@ brew install anwarahmed/tap/typeshelf
 
 Update with `brew upgrade typeshelf`; remove with `brew uninstall typeshelf`.
 
+## wordl
+
+[wordl](https://github.com/anwarahmed/wordl) — a Wordle-style word game for the
+terminal, written in bash. Works with Homebrew on macOS and Linux.
+
+```sh
+brew install anwarahmed/tap/wordl
+```
+
+Update with `brew upgrade wordl`; remove with `brew uninstall wordl`.
+
 ## How this repo works
 
-`Formula/typeshelf.rb` is generated, not written by hand. The "Update formula" workflow
-runs `scripts/render.sh` every few hours (and on demand), which reads the latest
-typeshelf release and its checksums and rewrites the formula if a new version is out.
-The same workflow then installs the formula on macOS and Linux as a check.
+The formulae in `Formula/` are generated, not written by hand. The "Update formula"
+workflow runs `scripts/render.sh` every few hours (and on demand), which reads each
+project's latest release and its checksums and rewrites a formula if a new version is
+out. The same workflow then installs every formula on macOS and Linux as a check.
 
 To pick up a release immediately instead of waiting for the schedule:
 
@@ -26,6 +37,6 @@ To pick up a release immediately instead of waiting for the schedule:
 gh workflow run update.yml --repo anwarahmed/homebrew-tap
 ```
 
-GitHub pauses scheduled workflows in repositories with no activity for 60 days. If the
+GitHub pauses scheduled workflows in repositories with no activity for 60 days. If a
 formula stops following releases, re-enable the workflow under Actions, or run the
 command above.
