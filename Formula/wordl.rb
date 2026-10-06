@@ -3,28 +3,28 @@
 class Wordl < Formula
   desc "Wordle-style word game for the terminal"
   homepage "https://github.com/anwarahmed/wordl"
-  version "0.2.5"
+  version "0.2.6"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.5/wordl-aarch64-apple-darwin"
-      sha256 "64e217b153967b4e783bf8ce2aac9c5eb640a15e2281da6035662d7c4316ccd2"
+      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.6/wordl-aarch64-apple-darwin"
+      sha256 "fa3de519c86d6ca4ac4677a45545c2e0a42820dd86d5c4d6a80bc1c79e289899"
     end
     on_intel do
-      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.5/wordl-x86_64-apple-darwin"
-      sha256 "fe3e4974c6a33814d707fec01b3d5b311dfc10edc553027758410525f188b869"
+      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.6/wordl-x86_64-apple-darwin"
+      sha256 "0deb617e4e14f7ab6cd53a2624a22f5751f69c59e86f7c7acd3513abedd2d847"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.5/wordl-aarch64-unknown-linux-musl"
-      sha256 "6e98c7e7983ab2a6d704738a0fd822b601c593bf4407f14b011091e2feb7b682"
+      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.6/wordl-aarch64-unknown-linux-musl"
+      sha256 "35993569d3c5884f2638f7bf99990ee679d20d8fd4297d7fe695ef6f0617b664"
     end
     on_intel do
-      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.5/wordl-x86_64-unknown-linux-musl"
-      sha256 "a78c67b604ed1e6e71f892673cdcf36eb9fa1f160558c18eedce2bba225603df"
+      url "https://github.com/anwarahmed/wordl/releases/download/v0.2.6/wordl-x86_64-unknown-linux-musl"
+      sha256 "db35ed71fdc81bca73e1a7333b0bb789302b0386ac54ff4ada50e1e4d4f7ce15"
     end
   end
 
