@@ -1,7 +1,8 @@
 # homebrew-tap
 
-The Homebrew tap for Anwar's projects: [typeshelf](https://github.com/anwarahmed/typeshelf)
-and [wordl](https://github.com/anwarahmed/wordl). Users run
+The Homebrew tap for Anwar's projects: [typeshelf](https://github.com/anwarahmed/typeshelf),
+[wordl](https://github.com/anwarahmed/wordl) and
+[funchess](https://github.com/anwarahmed/funchess). Users run
 `brew install anwarahmed/tap/<name>`. The repository name must start with `homebrew-`
 for that short form to work.
 
@@ -86,6 +87,18 @@ In wordl (a Rust program since 0.2.0; 0.1.x was a bash script shipped as one arc
   wordl moves or renames what it looks for, the formula must follow. wordl also checks
   its real path for `Cellar` as a fallback. The workflow's last wordl step proves the
   refusal on both platforms after every render.
+
+In funchess (a Rust program, the same shape as wordl):
+
+- Release assets are bare executables named `funchess-<rust target>`, for the same four
+  targets. `scripts/formulae/funchess.sh` fails if a checksum for one is missing.
+- Each release has a `SHA256SUMS` file in `sha256sum` format.
+- Tags are `v<version>`, and `funchess --version` prints that version.
+- **funchess must never update a Homebrew copy itself.** Its updater is wordl's: it
+  looks for `../share/funchess/managed-by` from the real directory of its binary, the
+  formula writes it (one line: `Homebrew; use brew upgrade funchess`), and
+  `funchess update` then prints "installed with Homebrew; use brew upgrade funchess".
+  The workflow's funchess step proves the refusal on both platforms after every render.
 
 Any new formula for a program that updates itself needs the same two things: the switch
 set at install time, and a test through the linked name.

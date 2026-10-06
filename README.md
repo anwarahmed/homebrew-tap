@@ -16,13 +16,25 @@ Update with `brew upgrade typeshelf`; remove with `brew uninstall typeshelf`.
 ## wordl
 
 [wordl](https://github.com/anwarahmed/wordl) — a Wordle-style word game for the
-terminal, written in bash. Works with Homebrew on macOS and Linux.
+terminal. Works with Homebrew on macOS and Linux.
 
 ```sh
 brew install anwarahmed/tap/wordl
 ```
 
 Update with `brew upgrade wordl`; remove with `brew uninstall wordl`.
+
+## funchess
+
+[funchess](https://github.com/anwarahmed/funchess) — chess for the terminal: against
+the computer, two players at one keyboard, or two computers over the network. Works
+with Homebrew on macOS and Linux.
+
+```sh
+brew install anwarahmed/tap/funchess
+```
+
+Update with `brew upgrade funchess`; remove with `brew uninstall funchess`.
 
 ## How this repo works
 
