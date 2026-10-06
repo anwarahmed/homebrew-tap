@@ -31,6 +31,11 @@ class Typeshelf < Formula
   def install
     # Each release asset is the bare executable, named for its platform.
     bin.install Dir["typeshelf-*"].first => "typeshelf"
+    # typeshelf updates itself unless a package owns the copy. Since 0.2.5 it looks for
+    # this marker at ../share/typeshelf/managed-by from its binary; replacing a file
+    # Homebrew installed would break the next brew upgrade.
+    (share/"typeshelf").mkpath
+    (share/"typeshelf/managed-by").write "Homebrew; use brew upgrade typeshelf\n"
   end
 
   test do

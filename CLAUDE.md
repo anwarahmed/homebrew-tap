@@ -65,7 +65,11 @@ In typeshelf:
 - Each release has a `SHA256SUMS` file in `sha256sum` format.
 - Tags are `v<version>`, and `typeshelf --version` prints that version (the formula's
   `test` block checks it).
-- **typeshelf must never update a Homebrew copy itself.** See the first incident below.
+- **typeshelf must never update a Homebrew copy itself.** Since 0.2.5 it looks for a
+  marker file at `../share/typeshelf/managed-by` from the real directory of its binary;
+  the formula writes it (one line: `Homebrew; use brew upgrade typeshelf`). Before that
+  it only guessed from `Cellar` in its path, which is what failed in the first incident
+  below; the guess is still there as a fallback.
 
 In wordl (a Rust program since 0.2.0; 0.1.x was a bash script shipped as one archive):
 
@@ -145,7 +149,9 @@ What to know when it happens:
   runs `typeshelf update` by its linked name on both runners and fails unless it refuses.
 
 The general rule: a program installed by a package manager must not rewrite its own
-files, and must resolve symlinks before deciding how it was installed.
+files, and must resolve symlinks before deciding how it was installed. Better than
+deciding at all: both formulae now install a marker file that tells the program
+Homebrew owns the copy, so nothing depends on how the path looks.
 
 ### The formula trails a release
 
@@ -179,5 +185,6 @@ Re-enable the workflow under Actions if the schedule stops.
 
 ## Not done
 
-- The token path (`TAP_TOKEN`, and the ten-minute wait in typeshelf's release run) has
-  never run for real.
+- Nothing is outstanding. The token path (`TAP_TOKEN`, and the ten-minute wait in the
+  projects' release runs) has run for real since typeshelf 0.2.4 and for every wordl
+  release from 0.1.1.
