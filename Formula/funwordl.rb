@@ -3,28 +3,28 @@
 class Funwordl < Formula
   desc "Playful Wordle-style word game for the terminal, made for children"
   homepage "https://github.com/anwarahmed/funwordl"
-  version "0.1.0"
+  version "0.1.1"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/anwarahmed/funwordl/releases/download/v0.1.0/funwordl-aarch64-apple-darwin"
-      sha256 "5d84be64fcd2c526194cbe7adad4091af74d0451074f9b5a68bd8a77c71cca93"
+      url "https://github.com/anwarahmed/funwordl/releases/download/v0.1.1/funwordl-aarch64-apple-darwin"
+      sha256 "2bd1199f040c909644756f2cfe31c73c3131172efa599ace6162cce409b13e27"
     end
     on_intel do
-      url "https://github.com/anwarahmed/funwordl/releases/download/v0.1.0/funwordl-x86_64-apple-darwin"
-      sha256 "3ea124f365d0fad475b9d0d77930e556d19f0283beb17859121411d450151c80"
+      url "https://github.com/anwarahmed/funwordl/releases/download/v0.1.1/funwordl-x86_64-apple-darwin"
+      sha256 "9d286954cb220ac36a9be0903c0de110b9efe9216b3c8dd26bdb7d3af3b7339d"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/anwarahmed/funwordl/releases/download/v0.1.0/funwordl-aarch64-unknown-linux-musl"
-      sha256 "fe358d3ededc2345325c4731fe5152f0b04b99b478d5e55d8890f072aec5d3d2"
+      url "https://github.com/anwarahmed/funwordl/releases/download/v0.1.1/funwordl-aarch64-unknown-linux-musl"
+      sha256 "fd4eeb9d04a1adbb7b1025ff947d78ac9fad2464c2fe6978d07bd0bdc7ede74f"
     end
     on_intel do
-      url "https://github.com/anwarahmed/funwordl/releases/download/v0.1.0/funwordl-x86_64-unknown-linux-musl"
-      sha256 "a5506cd28498720e0546f9dd71dd5c9503ae6a82de9cc3d26ab6f6a603f1e919"
+      url "https://github.com/anwarahmed/funwordl/releases/download/v0.1.1/funwordl-x86_64-unknown-linux-musl"
+      sha256 "f0ee6ec7afd38498874a023847a8262c3f0627a88693cd92913bab00aed768ff"
     end
   end
 
