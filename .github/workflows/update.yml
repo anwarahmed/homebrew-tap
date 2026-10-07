@@ -87,3 +87,13 @@ jobs:
           out=$(funchess update 2>&1) && status=0 || status=$?
           echo "$out"
           [ "$status" -ne 0 ] && echo "$out" | grep -q "installed with Homebrew"
+      - name: A Homebrew copy of funwordl must refuse to update itself
+        # Run by its linked name, as a user would, from another directory. The formula
+        # installs a marker (share/funwordl/managed-by) that says Homebrew owns the copy;
+        # funwordl then leaves updating to brew upgrade.
+        if: matrix.formula == 'funwordl'
+        run: |
+          cd /
+          out=$(funwordl update 2>&1) && status=0 || status=$?
+          echo "$out"
+          [ "$status" -ne 0 ] && echo "$out" | grep -q "installed with Homebrew"

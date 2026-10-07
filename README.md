@@ -36,6 +36,18 @@ brew install anwarahmed/tap/funchess
 
 Update with `brew upgrade funchess`; remove with `brew uninstall funchess`.
 
+## funwordl
+
+[funwordl](https://github.com/anwarahmed/funwordl) — a playful Wordle-style word game
+for the terminal, made for children: hints, stars, confetti and a collection of words
+learned. Works with Homebrew on macOS and Linux.
+
+```sh
+brew install anwarahmed/tap/funwordl
+```
+
+Update with `brew upgrade funwordl`; remove with `brew uninstall funwordl`.
+
 ## How this repo works
 
 The formulae in `Formula/` are generated, not written by hand. The "Update formula"
