@@ -3,28 +3,28 @@
 class Funchess < Formula
   desc "Chess for the terminal: solo, two players, or over the network"
   homepage "https://github.com/anwarahmed/funchess"
-  version "0.2.1"
+  version "0.2.2"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/anwarahmed/funchess/releases/download/v0.2.1/funchess-aarch64-apple-darwin"
-      sha256 "a02e8aabbea226be9bee36e555fa3c35cf50207e618fa81ede1f7daaed83a38c"
+      url "https://github.com/anwarahmed/funchess/releases/download/v0.2.2/funchess-aarch64-apple-darwin"
+      sha256 "26a76c1420475e273eb15a4b00ae10d1b45e81af886eb0cb6a5c383dca8e2a85"
     end
     on_intel do
-      url "https://github.com/anwarahmed/funchess/releases/download/v0.2.1/funchess-x86_64-apple-darwin"
-      sha256 "71c7ffa1de559403f902e7185c1c614c3e2b41e525edb14e4b2f0418704a1661"
+      url "https://github.com/anwarahmed/funchess/releases/download/v0.2.2/funchess-x86_64-apple-darwin"
+      sha256 "c926d10bfe969abe860ad9ba7144f84269f4996fee21f5774a3581fc7eb9f26b"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/anwarahmed/funchess/releases/download/v0.2.1/funchess-aarch64-unknown-linux-musl"
-      sha256 "5aec7162a867b0c37a18ddc675001faf66869466813829c1537f43d9be9cad00"
+      url "https://github.com/anwarahmed/funchess/releases/download/v0.2.2/funchess-aarch64-unknown-linux-musl"
+      sha256 "b6660c7f42f5b45308c5d3f8cd66a1cc25f9b4f1f9f2e0e663adf2b2b3f171c4"
     end
     on_intel do
-      url "https://github.com/anwarahmed/funchess/releases/download/v0.2.1/funchess-x86_64-unknown-linux-musl"
-      sha256 "68b76945bd26cea2c1ee531e46308246e4b10edbd46a9029114d7b7c59431486"
+      url "https://github.com/anwarahmed/funchess/releases/download/v0.2.2/funchess-x86_64-unknown-linux-musl"
+      sha256 "c0b25be204db67554867fa23a5204a7f1caccd89c16e95a152ad325d507b0122"
     end
   end
 
