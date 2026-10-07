@@ -114,8 +114,8 @@ In funwordl (a Rust program built on wordl's library; the same shape as wordl):
   then prints "installed with Homebrew; use brew upgrade funwordl". The workflow's
   funwordl step proves the refusal on both platforms after every render.
 - Its `TAP_TOKEN` secret was set by the user on 2026-10-07, after 0.1.0 had been
-  released without it (the tap was started by hand that once). No release has used
-  the token yet: the first one after 0.1.0 shows whether it works.
+  released without it (the tap was started by hand that once). It has worked
+  since 0.1.1, whose release run started this workflow and waited for the formula.
 
 Any new formula for a program that updates itself needs the same two things: the switch
 set at install time, and a test through the linked name.
