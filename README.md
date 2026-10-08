@@ -47,6 +47,17 @@ brew install anwarahmed/tap/fungeo
 
 Update with `brew upgrade fungeo`; remove with `brew uninstall fungeo`.
 
+## funkitty
+
+[funkitty](https://github.com/anwarahmed/funkitty) — fun time with Pink Kitty: little
+reading and typing games for young children, in the terminal.
+
+```sh
+brew install anwarahmed/tap/funkitty
+```
+
+Update with `brew upgrade funkitty`; remove with `brew uninstall funkitty`.
+
 ## funwordl
 
 [funwordl](https://github.com/anwarahmed/funwordl) — a playful Wordle-style word game
