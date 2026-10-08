@@ -36,6 +36,17 @@ brew install anwarahmed/tap/funchess
 
 Update with `brew upgrade funchess`; remove with `brew uninstall funchess`.
 
+## fungeo
+
+[fungeo](https://github.com/anwarahmed/fungeo) — a geography quiz for children, in the
+terminal: every right answer lays a plank of a bridge.
+
+```sh
+brew install anwarahmed/tap/fungeo
+```
+
+Update with `brew upgrade fungeo`; remove with `brew uninstall fungeo`.
+
 ## funwordl
 
 [funwordl](https://github.com/anwarahmed/funwordl) — a playful Wordle-style word game

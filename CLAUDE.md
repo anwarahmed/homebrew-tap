@@ -2,8 +2,9 @@
 
 The Homebrew tap for Anwar's projects: [typeshelf](https://github.com/anwarahmed/typeshelf),
 [wordl](https://github.com/anwarahmed/wordl),
-[funchess](https://github.com/anwarahmed/funchess) and
-[funwordl](https://github.com/anwarahmed/funwordl). Users run
+[funchess](https://github.com/anwarahmed/funchess),
+[funwordl](https://github.com/anwarahmed/funwordl) and
+[fungeo](https://github.com/anwarahmed/fungeo). Users run
 `brew install anwarahmed/tap/<name>`. The repository name must start with `homebrew-`
 for that short form to work.
 
@@ -100,6 +101,18 @@ In funchess (a Rust program, the same shape as wordl):
   formula writes it (one line: `Homebrew; use brew upgrade funchess`), and
   `funchess update` then prints "installed with Homebrew; use brew upgrade funchess".
   The workflow's funchess step proves the refusal on both platforms after every render.
+In fungeo (a Rust program, the same shape as funchess):
+
+- Release assets are bare executables named `fungeo-<rust target>`, for the same four
+  targets. `scripts/formulae/fungeo.sh` fails if a checksum for one is missing.
+- Each release has a `SHA256SUMS` file in `sha256sum` format.
+- Tags are `v<version>`, and `fungeo --version` prints that version.
+- **fungeo must never update a Homebrew copy itself.** Its updater is wordl's: it
+  looks for `../share/fungeo/managed-by` from the real directory of its binary, the
+  formula writes it (one line: `Homebrew; use brew upgrade fungeo`), and
+  `fungeo update` then prints "installed with Homebrew; use brew upgrade fungeo".
+  The workflow's fungeo step proves the refusal on both platforms after every render.
+
 
 In funwordl (a Rust program built on wordl's library; the same shape as wordl):
 

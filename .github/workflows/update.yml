@@ -87,6 +87,16 @@ jobs:
           out=$(funchess update 2>&1) && status=0 || status=$?
           echo "$out"
           [ "$status" -ne 0 ] && echo "$out" | grep -q "installed with Homebrew"
+      - name: A Homebrew copy of fungeo must refuse to update itself
+        # Run by its linked name, as a user would, from another directory. The formula
+        # installs a marker (share/fungeo/managed-by) that says Homebrew owns the copy;
+        # fungeo then leaves updating to brew upgrade.
+        if: matrix.formula == 'fungeo'
+        run: |
+          cd /
+          out=$(fungeo update 2>&1) && status=0 || status=$?
+          echo "$out"
+          [ "$status" -ne 0 ] && echo "$out" | grep -q "installed with Homebrew"
       - name: A Homebrew copy of funwordl must refuse to update itself
         # Run by its linked name, as a user would, from another directory. The formula
         # installs a marker (share/funwordl/managed-by) that says Homebrew owns the copy;
