@@ -3,28 +3,28 @@
 class Fungeo < Formula
   desc "Geography quiz for children in the terminal: build a bridge, answer by answer"
   homepage "https://github.com/anwarahmed/fungeo"
-  version "0.1.2"
+  version "0.1.3"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/anwarahmed/fungeo/releases/download/v0.1.2/fungeo-aarch64-apple-darwin"
-      sha256 "ae5a6a3ea7e3b45ae3417b7ad371c6588b896b991ecab649ab7c2a0af0926f27"
+      url "https://github.com/anwarahmed/fungeo/releases/download/v0.1.3/fungeo-aarch64-apple-darwin"
+      sha256 "a7ccb41429fd6c71460d5508cda4b49224eac7dec64ef33fb18341c29db43fe1"
     end
     on_intel do
-      url "https://github.com/anwarahmed/fungeo/releases/download/v0.1.2/fungeo-x86_64-apple-darwin"
-      sha256 "0ba72135c7f33dcfe1b274bea061293ba56fc0dbc65b100c11821676b3340f04"
+      url "https://github.com/anwarahmed/fungeo/releases/download/v0.1.3/fungeo-x86_64-apple-darwin"
+      sha256 "a58f7c2c369fa08480ed9c8c2313300a08b2eef96e467e5a37cb58f39d88316d"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/anwarahmed/fungeo/releases/download/v0.1.2/fungeo-aarch64-unknown-linux-musl"
-      sha256 "914f3b1ef2906c9273904430d2b61418ac2c7ad5d1a01fed637d08d042a04132"
+      url "https://github.com/anwarahmed/fungeo/releases/download/v0.1.3/fungeo-aarch64-unknown-linux-musl"
+      sha256 "67287a78b3321bf84c78d17239ec2cf8dc39fea08f3e5968b7f7e21c48a7d8e7"
     end
     on_intel do
-      url "https://github.com/anwarahmed/fungeo/releases/download/v0.1.2/fungeo-x86_64-unknown-linux-musl"
-      sha256 "50ccae638bb409b4374ccdf2124f5fcfbe328e04c8815e671e538ea51680d20e"
+      url "https://github.com/anwarahmed/fungeo/releases/download/v0.1.3/fungeo-x86_64-unknown-linux-musl"
+      sha256 "97ec2b5edd3f7246537cd905a48216665270e418f95677447f00494ddd465044"
     end
   end
 
