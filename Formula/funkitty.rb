@@ -3,28 +3,28 @@
 class Funkitty < Formula
   desc "Fun time with Pink Kitty: reading and typing games for young children"
   homepage "https://github.com/anwarahmed/funkitty"
-  version "0.1.1"
+  version "0.1.2"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/anwarahmed/funkitty/releases/download/v0.1.1/funkitty-aarch64-apple-darwin"
-      sha256 "bf4bd3ac88131e4a1e5d887b63916f22590f93ad2526f82992236e9abb0b6172"
+      url "https://github.com/anwarahmed/funkitty/releases/download/v0.1.2/funkitty-aarch64-apple-darwin"
+      sha256 "5001e5aa9f023a00925fe83b9e91735cbbb3bd77191bbc29ea3eea6fd4a840ea"
     end
     on_intel do
-      url "https://github.com/anwarahmed/funkitty/releases/download/v0.1.1/funkitty-x86_64-apple-darwin"
-      sha256 "d673a143df443d63624bc150b1de3ad5284260a8ca3991015e69c804f72ccb97"
+      url "https://github.com/anwarahmed/funkitty/releases/download/v0.1.2/funkitty-x86_64-apple-darwin"
+      sha256 "27a280309d71062681d5968eb8e83658a7886744ee46a811e8ea00e1db6a3f90"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/anwarahmed/funkitty/releases/download/v0.1.1/funkitty-aarch64-unknown-linux-musl"
-      sha256 "a1ce2355a1531a68122ae63502e148fa02ec9b5734733a494f49f9be034cb32f"
+      url "https://github.com/anwarahmed/funkitty/releases/download/v0.1.2/funkitty-aarch64-unknown-linux-musl"
+      sha256 "88a7b81922e0ab78c117c1fc50d3f030d820e67a63ceb065b55c36a913d25f67"
     end
     on_intel do
-      url "https://github.com/anwarahmed/funkitty/releases/download/v0.1.1/funkitty-x86_64-unknown-linux-musl"
-      sha256 "49208482dc22208a6102cfb8e24aaef0e6f4ad0c43f23fb25c04745b92f4267a"
+      url "https://github.com/anwarahmed/funkitty/releases/download/v0.1.2/funkitty-x86_64-unknown-linux-musl"
+      sha256 "536ad729a09e9c35519bf190baf9c536bd6073e01f46b709cac5b012fb2af21e"
     end
   end
 
